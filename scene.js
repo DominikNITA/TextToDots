@@ -6,7 +6,7 @@ class Scene{
         this.color = color;
         this.title = title;
         this.duration = duration;
-        this.possiblePlaces = this.defaultPlaces;
+        this.possiblePlaces = possiblePlaces;
         this.font = font;
         this.words = this.createWords();
     }

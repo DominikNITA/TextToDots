@@ -1,7 +1,8 @@
 class Dot{
     constructor(posX, posY){
-        this.pos = createVector(posX, posY)
-        this.speed = 3.5;
+        this.pos = createVector(posX, posY);
+        this.initialPos = createVector(posX, posY);
+        this.speed = 4;
         this.arrived = false;
     }
 
@@ -13,13 +14,53 @@ class Dot{
         this.target = createVector(targetX, targetY);
     }
 
+    changePosition(deltaX, deltaY){
+        this.pos.x = this.pos.x + deltaX;
+        this.pos.y = this.pos.y + deltaY;
+    }
+
+    moveConstantSpeedX(){
+        return abs(this.target.x - this.pos.x) < 2 ? 0 : this.speed*(this.target.x - this.pos.x)/abs(this.target.x - this.pos.x);
+    }
+
+    moveConstantSpeedY(){
+        return abs(this.target.y - this.pos.y) < 2 ? 0 : this.speed*(this.target.y - this.pos.y)/abs(this.target.y - this.pos.y);
+    }
+
+    moveConstantSpeedForBothAxis(){
+        let deltaX = this.moveConstantSpeedX();
+        let deltaY = this.moveConstantSpeedY();
+        if(deltaX == 0 && deltaY == 0){
+            this.arrived = 0;
+            console.log(this.arrived, this.pos);
+        }
+        return [deltaX, deltaY];
+    }
+
+    moveXFirst(){
+        let deltaX = this.moveConstantSpeedX();
+        let deltaY = deltaX != 0 ? 0 : this.moveConstantSpeedY();
+        return [deltaX, deltaY];
+    }
+
+    moveYFirst(){
+        let deltaY = this.moveConstantSpeedY();
+        let deltaX = deltaY != 0 ? 0 : this.moveConstantSpeedX();
+        return [deltaX, deltaY];
+    }
+
+    moveArrivesSameMoment(){
+        // todo: delete speed
+        let deltaX = (this.target.x - this.initialPos.x)/30;
+        let deltaY = (this.target.y - this.initialPos.y)/30;
+        return [deltaX, deltaY];
+    }
+
     move(){
         if(!this.arrived){
-            let deltaX = abs(this.target.x - this.pos.x) < 2 ? 0: (this.target.x - this.pos.x)/abs(this.target.x - this.pos.x);
-            let deltaY = abs(this.target.y - this.pos.y) < 2 ? 0: (this.target.y - this.pos.y)/abs(this.target.y - this.pos.y);
-            this.pos.x = this.pos.x + this.speed*deltaX;
-            this.pos.y = this.pos.y + this.speed*deltaY;
-            if(dist(this.pos.x, this.pos.y, this.target.x, this.target.y) < 2){
+            let delta = this.moveArrivesSameMoment();
+            this.changePosition(delta[0], delta[1]);
+            if(dist(this.pos.x, this.pos.y, this.target.x, this.target.y) < 2.6 || (delta[0] == 0 && delta[1] == 0)){
                 this.pos = this.target;
                 this.arrived = true;
             }

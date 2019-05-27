@@ -9,7 +9,7 @@ function preload() {
 }
 
 function setup () {
-    let canvas = createCanvas(900,550);
+    let canvas = createCanvas(1200,550);
     canvas.id("canvas");
     canvas.parent('canvasHolder');
     background(100);

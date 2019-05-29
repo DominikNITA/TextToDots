@@ -49,16 +49,15 @@ class Dot{
         return [deltaX, deltaY];
     }
 
-    moveArrivesSameMoment(){
-        // todo: delete speed
-        let deltaX = (this.target.x - this.initialPos.x)/30;
-        let deltaY = (this.target.y - this.initialPos.y)/30;
+    moveArriveSameMoment(){
+        let deltaX = (this.target.x - this.initialPos.x)/60;
+        let deltaY = (this.target.y - this.initialPos.y)/60;
         return [deltaX, deltaY];
     }
 
     move(){
         if(!this.arrived){
-            let delta = this.moveArrivesSameMoment();
+            let delta = this.moveConstantSpeedForBothAxis();
             this.changePosition(delta[0], delta[1]);
             if(dist(this.pos.x, this.pos.y, this.target.x, this.target.y) < 2.6 || (delta[0] == 0 && delta[1] == 0)){
                 this.pos = this.target;

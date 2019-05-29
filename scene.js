@@ -8,8 +8,16 @@ class Scene{
         this.duration = duration;
         this.possiblePlaces = possiblePlaces;
         this.font = font;
+        this.reset();
+    }
+
+    reset(){
+        this.elapsedFrames = 0;
+        this.arrived = false;
+        this.finished = false;
         this.words = this.createWords();
     }
+
 
     createWords(){
         let words = [];
@@ -20,10 +28,37 @@ class Scene{
     }
 
     drawWords(){
-        this.words.forEach(word => {
-            word.moveDots();
-            word.drawDots();
-        });
+        if(!this.finished){
+            if(!this.arrived){
+                background(100);
+                this.words.forEach(word => {
+                    word.moveDots();
+                    word.drawDots();
+                });
+                this.checkArrived();
+            }
+            else{
+                console.log("Finished: " + this.finished);
+                this.elapsedFrames++;
+                if(this.elapsedFrames/frameRate() >= this.duration){
+                    this.finished = true;
+                }
+            }
+        }
+
     }
 
+    checkArrived(){
+        let res = true;
+        for (let index = 0; index < this.words.length; index++) {
+            const word = this.words[index];
+            word.checkArrived();
+            if(!word.arrived){
+                res = false;
+                break;
+            }
+        }
+        this.arrived = res;
+        console.log(this.arrived);
+    }
 }

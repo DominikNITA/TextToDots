@@ -30,11 +30,13 @@ function setup () {
     //   stroke(250,250,250);
     //   point(pt.x,pt.y);
     // });
-    scene = new Scene(['Java', 'C#/C++', 'Python', 'JS'],'test','black',5000, font);
-    scene.drawWords();
+    routine = new Routine();
+    scene = new Scene(['Java', 'C#/C++', 'Python', 'JS'],'test','black',5, font);
+    scene2 = new Scene(['Dodo','Yo', 'Hey'],'test','black',5, font);
+    routine.addScene(scene);
+    routine.addScene(scene2);
   }
 
 function draw () {
-    background(100);
-    scene.drawWords();
+    routine.draw();
   }

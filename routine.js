@@ -1,8 +1,8 @@
 class Routine{
     constructor(){
         this.scenes = [];
-        this.actualScene = 0;
-        this.colorManager = new ColorManager(color(255),color(255),color(50));
+        this.actualSceneIndex = 0;
+        this.colorManager = new ColorManager(color(29,200,143),color(255),color(80));
     }
 
     addScene(scene){
@@ -10,15 +10,16 @@ class Routine{
     }
 
     draw(){
-        if(this.scenes[this.actualScene].finished){
-            this.scenes[this.actualScene].reset();
-            this.actualScene++;
-            if(this.actualScene >= this.scenes.length){
-                this.actualScene = 0;
+        if(this.scenes[this.actualSceneIndex].finished){
+            this.scenes[this.actualSceneIndex].reset();
+            this.actualSceneIndex++;
+            if(this.actualSceneIndex >= this.scenes.length){
+                this.actualSceneIndex = 0;
             }
         }
         else{
-            this.scenes[this.actualScene].drawWords();
+            background(this.colorManager.getBackgroundColor());
+            this.scenes[this.actualSceneIndex].drawWords();
         }
     }
 }

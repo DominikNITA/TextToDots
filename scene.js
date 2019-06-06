@@ -1,14 +1,20 @@
 class Scene{
     defaultPlaces = [[30,15],[70,15],[30,85],[70,85]];
 
-    constructor(wordsList, title, color, duration, font, possiblePlaces = this.defaultPlaces){
+    constructor(wordsList, title, duration, font, possiblePlaces = this.defaultPlaces){
         this.wordsList = wordsList;
-        this.color = color;
         this.title = title;
+        this.dotsColor = color(0);
+        this.titleColor = color(255);
         this.duration = duration;
         this.possiblePlaces = possiblePlaces;
         this.font = font;
         this.reset();
+    }
+
+    setColors(dotsColor = this.dotsColor, titleColor = this.titleColor){
+        this.dotsColor = dotsColor;
+        this.titleColor = titleColor;
     }
 
     reset(){
@@ -30,20 +36,21 @@ class Scene{
     drawWords(){
         if(!this.finished){
             if(!this.arrived){
-                background(100);
                 this.words.forEach(word => {
                     word.moveDots();
-                    word.drawDots();
                 });
                 this.checkArrived();
             }
             else{
-                console.log("Finished: " + this.finished);
+                console.log(this.elapsedFrames);
                 this.elapsedFrames++;
                 if(this.elapsedFrames/frameRate() >= this.duration){
                     this.finished = true;
                 }
             }
+            this.words.forEach(word => {
+                word.drawDots(this.dotsColor);
+            });
         }
 
     }

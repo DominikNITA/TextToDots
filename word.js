@@ -42,10 +42,10 @@ class Word{
         }
     }
 
-    drawDots(){
+    drawDots(dotsColor){
         ///refactor
         strokeWeight(5);
-        stroke(140,250,50);
+        stroke(dotsColor);
         this.dots.forEach(dot => {
             point(dot.position.x,dot.position.y);
         });

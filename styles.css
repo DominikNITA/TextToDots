@@ -1,5 +1,15 @@
 #canvasHolder{
-    width: fit-content;
-    height: fit-content;
+    width: 80%;
+    height: 50%;
+    min-width: 400px;
+    min-height: 400px;
     margin: auto;
 }
+
+body{
+    height: 100vh;
+}
+/* #canvasHolder *{
+    width: auto !important;
+    height: auto !important;
+} */

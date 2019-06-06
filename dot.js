@@ -31,8 +31,8 @@ class Dot{
         let deltaX = this.moveConstantSpeedX();
         let deltaY = this.moveConstantSpeedY();
         if(deltaX == 0 && deltaY == 0){
-            this.arrived = 0;
-            console.log(this.arrived, this.pos);
+            this.arrived = true;
+            console.log("Arrived: " + this.arrived, this.pos);
         }
         return [deltaX, deltaY];
     }

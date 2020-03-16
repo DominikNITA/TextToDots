@@ -24,7 +24,7 @@ function setup () {
 
     routine = new Routine();
     scene = new Scene(['Java', 'C#/C++', 'Python', 'JS'],'test',5, font);
-    scene2 = new Scene(['Dodo','Yo', 'Hey'],'test',5, font);
+    scene2 = new Scene(['Dominik','Nita', 'Polytech Paris-Saclay'],'test',5, font);
     routine.addScene(scene);
     routine.addScene(scene2);
   }
